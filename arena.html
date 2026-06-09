@@ -4,83 +4,594 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ArenaX</title>
+<title>ArenaX Arena</title>
 
-<link rel="stylesheet" href="arena.css">
+<style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#05030a;
+overflow:hidden;
+color:white;
+}
+
+#game{
+
+width:100vw;
+height:100vh;
+
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.75)
+),
+url("banner.png");
+
+background-size:cover;
+background-position:center;
+
+position:relative;
+}
+
+/* CHARACTER SELECT */
+
+#selectScreen{
+
+position:absolute;
+inset:0;
+
+display:flex;
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+background:rgba(0,0,0,.8);
+
+z-index:50;
+}
+
+#selectScreen h1{
+margin-bottom:30px;
+font-size:3rem;
+}
+
+.fighterGrid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+}
+
+.pick{
+
+background:#1a1327;
+
+border:2px solid #8d4cff;
+
+padding:15px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+.pick:hover{
+
+transform:scale(1.05);
+
+}
+
+.pick img{
+
+width:120px;
+height:120px;
+object-fit:contain;
+
+}
+
+/* UI */
+
+#countdown{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:8rem;
+
+font-weight:bold;
+
+display:none;
+
+z-index:30;
+}
+
+.hpContainer{
+
+position:absolute;
+
+top:20px;
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:40px;
+
+z-index:10;
+}
+
+.bar{
+
+width:300px;
+height:30px;
+
+border:2px solid white;
+
+background:#222;
+
+}
+
+.hp{
+
+height:100%;
+
+background:lime;
+
+width:100%;
+}
+
+/* FIGHTERS */
+
+.fighter{
+
+position:absolute;
+
+bottom:120px;
+
+width:180px;
+
+height:180px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+transition:.08s;
+}
+
+.fighter img{
+
+width:100%;
+height:100%;
+
+object-fit:contain;
+
+pointer-events:none;
+}
+
+#player{
+
+left:100px;
+
+}
+
+#enemy{
+
+right:100px;
+
+transform:scaleX(-1);
+
+}
+
+/* HIT */
+
+.hit{
+
+filter:
+brightness(3)
+drop-shadow(0 0 15px red);
+
+}
+
+/* KO */
+
+#koScreen{
+
+display:none;
+
+position:absolute;
+
+inset:0;
+
+background:rgba(0,0,0,.9);
+
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+z-index:99;
+}
+
+#koScreen h1{
+
+font-size:5rem;
+
+margin-bottom:20px;
+}
+
+.btn{
+
+padding:15px 30px;
+
+margin:10px;
+
+border:none;
+
+border-radius:12px;
+
+background:#8d4cff;
+
+color:white;
+
+cursor:pointer;
+
+font-size:1rem;
+}
+
+.controls{
+
+position:absolute;
+
+bottom:20px;
+left:20px;
+
+opacity:.7;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="menu">
+<div id="game">
 
-<h1>⚔️ ARENAX ⚔️</h1>
+<div id="selectScreen">
 
-<p>Select Your Fighter</p>
+<h1>⚔️ SELECT YOUR FIGHTER ⚔️</h1>
 
-<div id="fighters">
+<div class="fighterGrid">
 
-<button onclick="startGame('CHAD')">
-💪 CHAD DESTROYER
-</button>
+<div class="pick" onclick="startGame('chad')">
+<img src="chad.png">
+<div>CHAD</div>
+</div>
 
-<button onclick="startGame('PEPE')">
-🐸 PEPE ASSASSIN
-</button>
+<div class="pick" onclick="startGame('pepe')">
+<img src="pepe.png">
+<div>PEPE</div>
+</div>
 
-<button onclick="startGame('MOON')">
-🌙 MOON KING
-</button>
+<div class="pick" onclick="startGame('moonking')">
+<img src="moonking.png">
+<div>MOON KING</div>
+</div>
 
-<button onclick="startGame('GOBLIN')">
-👹 RUG GOBLIN
-</button>
+<div class="pick" onclick="startGame('wojak')">
+<img src="wojak.png">
+<div>WOJAK</div>
+</div>
 
-<button onclick="startGame('DIAMOND')">
-💎 DIAMOND HANDS
-</button>
+<div class="pick" onclick="startGame('goblin')">
+<img src="goblin.png">
+<div>GOBLIN</div>
+</div>
 
+<div class="pick" onclick="startGame('hodl')">
+<img src="hodl.png">
+<div>HODL</div>
 </div>
 
 </div>
 
-<div id="game" style="display:none;">
+</div>
 
-<div id="hud">
+<div id="countdown"></div>
 
-<div>
-Player HP
+<div class="hpContainer">
+
 <div class="bar">
-<div id="playerHP"></div>
-</div>
+<div id="playerHP" class="hp"></div>
 </div>
 
-<div>
-Enemy HP
 <div class="bar">
-<div id="enemyHP"></div>
-</div>
-</div>
-
-</div>
-
-<canvas id="arena"></canvas>
-
-<div id="controls">
-
-A/D = MOVE
-
-J = PUNCH
-
-K = KICK
-
-L = SPECIAL
-
+<div id="enemyHP" class="hp"></div>
 </div>
 
 </div>
 
-<script src="arena.js"></script>
+<div id="player" class="fighter"></div>
+<div id="enemy" class="fighter"></div>
+
+<div class="controls">
+
+A = LEFT<br>
+D = RIGHT<br>
+SPACE = ATTACK
+
+</div>
+
+<div id="koScreen">
+
+<h1 id="winnerText"></h1>
+
+<button class="btn" onclick="location.reload()">
+PLAY AGAIN
+</button>
+
+<button class="btn" onclick="location.href='index.html'">
+BACK TO ARENAX
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const fighters=[
+"chad",
+"pepe",
+"moonking",
+"wojak",
+"goblin",
+"hodl"
+];
+
+let playerCharacter="";
+let enemyCharacter="";
+
+let playerHP=100;
+let enemyHP=100;
+
+let playerX=100;
+let enemyX=700;
+
+let gameStarted=false;
+
+const player=document.getElementById("player");
+const enemy=document.getElementById("enemy");
+
+function startGame(character){
+
+playerCharacter=character;
+
+const enemies=
+fighters.filter(f=>f!==character);
+
+enemyCharacter=
+enemies[
+Math.floor(Math.random()*enemies.length)
+];
+
+player.innerHTML=
+`<img src="${playerCharacter}.png">`;
+
+enemy.innerHTML=
+`<img src="${enemyCharacter}.png">`;
+
+document.getElementById("selectScreen")
+.style.display="none";
+
+countdown();
+
+}
+
+function countdown(){
+
+const cd=document.getElementById("countdown");
+
+cd.style.display="block";
+
+let numbers=["3","2","1","FIGHT!"];
+
+let i=0;
+
+const timer=setInterval(()=>{
+
+cd.innerText=numbers[i];
+
+i++;
+
+if(i===numbers.length){
+
+clearInterval(timer);
+
+setTimeout(()=>{
+
+cd.style.display="none";
+
+gameStarted=true;
+
+},800);
+
+}
+
+},900);
+
+}
+
+function updateHP(){
+
+document.getElementById("playerHP")
+.style.width=playerHP+"%";
+
+document.getElementById("enemyHP")
+.style.width=enemyHP+"%";
+
+}
+
+function hitAnimation(target){
+
+target.classList.add("hit");
+
+setTimeout(()=>{
+
+target.classList.remove("hit");
+
+},150);
+
+}
+
+function attack(){
+
+if(!gameStarted)return;
+
+const distance=
+Math.abs(playerX-enemyX);
+
+if(distance<180){
+
+const damage=
+Math.floor(Math.random()*15)+5;
+
+enemyHP-=damage;
+
+if(enemyHP<0)enemyHP=0;
+
+hitAnimation(enemy);
+
+updateHP();
+
+if(enemyHP<=0){
+
+win(playerCharacter.toUpperCase());
+
+}
+
+}
+
+}
+
+function enemyAttack(){
+
+if(!gameStarted)return;
+
+if(enemyHP<=0)return;
+
+const distance=
+Math.abs(playerX-enemyX);
+
+if(distance<180){
+
+const damage=
+Math.floor(Math.random()*12)+4;
+
+playerHP-=damage;
+
+if(playerHP<0)playerHP=0;
+
+hitAnimation(player);
+
+updateHP();
+
+if(playerHP<=0){
+
+win(enemyCharacter.toUpperCase());
+
+}
+
+}
+
+}
+
+function win(name){
+
+gameStarted=false;
+
+document.getElementById("winnerText")
+.innerText=`☠️ ${name} WINS ☠️`;
+
+document.getElementById("koScreen")
+.style.display="flex";
+
+}
+
+document.addEventListener("keydown",(e)=>{
+
+if(!gameStarted)return;
+
+if(e.key==="a"){
+
+playerX-=20;
+
+}
+
+if(e.key==="d"){
+
+playerX+=20;
+
+}
+
+if(e.code==="Space"){
+
+attack();
+
+}
+
+playerX=
+Math.max(0,
+Math.min(window.innerWidth-200,
+playerX));
+
+player.style.left=
+playerX+"px";
+
+});
+
+setInterval(()=>{
+
+if(!gameStarted)return;
+
+if(enemyHP<=0)return;
+
+if(playerHP<=0)return;
+
+if(enemyX>playerX+150){
+
+enemyX-=4;
+
+}
+
+enemy.style.left=
+enemyX+"px";
+
+if(Math.random()<0.015){
+
+enemyAttack();
+
+}
+
+},30);
+
+updateHP();
+
+</script>
 
 </body>
 </html>
