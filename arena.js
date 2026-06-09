@@ -4,35 +4,69 @@ const ctx=canvas.getContext("2d");
 canvas.width=1200;
 canvas.height=600;
 
+const fighters=[
+"CHAD",
+"PEPE",
+"MOONKING",
+"WOJAK",
+"GOBLIN",
+"HODL"
+];
+
 let player;
 let enemy;
-
 let gameStarted=false;
+
+const images={};
+
+function loadImage(name){
+
+const img=new Image();
+img.src=name.toLowerCase()+".png";
+
+return img;
+
+}
+
+fighters.forEach(f=>{
+
+images[f]=loadImage(f);
+
+});
 
 function startGame(name){
 
 document.getElementById("menu").style.display="none";
-
 document.getElementById("game").style.display="block";
 
+const possibleEnemies=
+fighters.filter(f=>f!==name);
+
+const randomEnemy=
+possibleEnemies[
+Math.floor(
+Math.random()*possibleEnemies.length
+)
+];
+
 player={
-x:200,
-y:400,
-w:80,
-h:120,
+x:150,
+y:330,
+w:160,
+h:180,
 hp:100,
-color:"#9d4edd",
-name:name
+name:name,
+img:images[name]
 };
 
 enemy={
 x:900,
-y:400,
-w:80,
-h:120,
+y:330,
+w:160,
+h:180,
 hp:100,
-color:"#00c2ff",
-name:"ENEMY"
+name:randomEnemy,
+img:images[randomEnemy]
 };
 
 gameStarted=true;
@@ -45,9 +79,8 @@ requestAnimationFrame(loop);
 
 function drawFighter(f){
 
-ctx.fillStyle=f.color;
-
-ctx.fillRect(
+ctx.drawImage(
+f.img,
 f.x,
 f.y,
 f.w,
@@ -55,8 +88,7 @@ f.h
 );
 
 ctx.fillStyle="white";
-
-ctx.font="20px Arial";
+ctx.font="24px Arial";
 
 ctx.fillText(
 f.name,
@@ -67,6 +99,8 @@ f.y-10
 }
 
 function loop(){
+
+if(!gameStarted)return;
 
 ctx.clearRect(
 0,
@@ -85,7 +119,6 @@ ctx.fillRect(
 );
 
 drawFighter(player);
-
 drawFighter(enemy);
 
 enemyAI();
@@ -98,9 +131,41 @@ function enemyAI(){
 
 if(enemy.hp<=0)return;
 
-if(enemy.x-player.x>150){
+if(enemy.x-player.x>180){
 
-enemy.x-=0.4;
+enemy.x-=0.5;
+
+}
+
+if(Math.random()<0.01){
+
+enemyAttack();
+
+}
+
+}
+
+function enemyAttack(){
+
+const distance=
+Math.abs(player.x-enemy.x);
+
+if(distance<180){
+
+const damage=
+Math.floor(Math.random()*12)+5;
+
+player.hp-=damage;
+
+if(player.hp<0)player.hp=0;
+
+updateBars();
+
+if(player.hp<=0){
+
+showWinner(enemy.name);
+
+}
 
 }
 
@@ -112,13 +177,13 @@ if(!gameStarted)return;
 
 if(e.key==="a"){
 
-player.x-=15;
+player.x-=20;
 
 }
 
 if(e.key==="d"){
 
-player.x+=15;
+player.x+=20;
 
 }
 
@@ -140,48 +205,101 @@ attack(35);
 
 }
 
+player.x=
+Math.max(
+0,
+Math.min(1050,player.x)
+);
+
 });
 
 function attack(dmg){
 
-let distance=Math.abs(
-player.x-enemy.x
-);
+const distance=
+Math.abs(player.x-enemy.x);
 
-if(distance<140){
+if(distance<180){
 
 enemy.hp-=dmg;
 
-enemy.color="#ff4444";
+if(enemy.hp<0)
+enemy.hp=0;
 
-setTimeout(()=>{
+updateBars();
 
-enemy.color="#00c2ff";
-
-},100);
-
-}
+flashEnemy();
 
 if(enemy.hp<=0){
 
-enemy.hp=0;
-
-alert("🏆 ROUND CLEARED");
+showWinner(player.name);
 
 }
 
-updateBars();
+}
+
+}
+
+function flashEnemy(){
+
+const oldImg=enemy.img;
+
+enemy.img=null;
+
+setTimeout(()=>{
+
+enemy.img=oldImg;
+
+},80);
 
 }
 
 function updateBars(){
 
-document
-.getElementById("playerHP")
-.style.width=player.hp+"%";
+document.getElementById(
+"playerHP"
+).style.width=
+player.hp+"%";
 
-document
-.getElementById("enemyHP")
-.style.width=enemy.hp+"%";
+document.getElementById(
+"enemyHP"
+).style.width=
+enemy.hp+"%";
+
+}
+
+function showWinner(name){
+
+gameStarted=false;
+
+let screen=
+document.getElementById(
+"winnerScreen"
+);
+
+if(!screen){
+
+screen=document.createElement("div");
+
+screen.id="winnerScreen";
+
+screen.innerHTML=`
+<h1>🏆 ${name} WINS 🏆</h1>
+
+<button class="playBtn"
+onclick="location.reload()">
+PLAY AGAIN
+</button>
+
+<button class="playBtn"
+onclick="location.href='index.html'">
+BACK TO ARENAX
+</button>
+`;
+
+document.body.appendChild(screen);
+
+}
+
+screen.style.display="flex";
 
 }
