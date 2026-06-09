@@ -500,17 +500,24 @@ function updateAnimation(entity, dt) {
     }
   }
 
-  if (entity.state !== "ko" && (entity.state === "punch" || entity.state === "kick" || entity.state === "special" || entity.state === "hit")) {
-    if (performance.now() >= entity.stateEnd) {
-      const moving = entity === player
-        ? (keys["a"] || keys["d"])
-        : false;
+  if (
+    entity.state === "punch" ||
+    entity.state === "kick" ||
+    entity.state === "special" ||
+    entity.state === "hit"
+) {
 
-      if (!isBusy(entity) || entity.state === "hit") {
-        setState(entity, moving ? "walk" : "idle");
-      }
+    if (performance.now() >= entity.stateEnd) {
+
+        const moving =
+            entity === player &&
+            (keys["a"] || keys["d"]);
+
+        setState(
+            entity,
+            moving ? "walk" : "idle"
+        );
     }
-  }
 }
 
 function drawStage() {
@@ -635,7 +642,6 @@ function render(now) {
 }
 
 function loop(ts) {
-  if (!gameStarted) return;
 
   const now = ts || performance.now();
   const dt = lastTs ? Math.min(0.033, (now - lastTs) / 1000) : 0.016;
@@ -644,9 +650,7 @@ function loop(ts) {
   update(dt, now);
   render(now);
 
-  if (gameStarted) {
-    requestAnimationFrame(loop);
-  }
+  requestAnimationFrame(loop);
 }
 
 async function startGame(name) {
