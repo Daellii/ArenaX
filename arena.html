@@ -1,15 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>ArenaX Test</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ArenaX</title>
+
+<link rel="stylesheet" href="arena.css">
+
 </head>
-<body style="background:black;color:white;text-align:center;">
+
+<body>
+
+<div id="menu">
 
 <h1>⚔️ SELECT YOUR FIGHTER ⚔️</h1>
 
-<img src="chad.png" width="150">
-<img src="pepe.png" width="150">
-<img src="moonking.png" width="150">
+<div id="fighters">
+
+<button onclick="startGame('CHAD')">
+<img src="chad.png" width="100"><br>
+CHAD
+</button>
+
+<button onclick="startGame('PEPE')">
+<img src="pepe.png" width="100"><br>
+PEPE
+</button>
+
+<button onclick="startGame('MOONKING')">
+<img src="moonking.png" width="100"><br>
+MOON KING
+</button>
+
+<button onclick="startGame('WOJAK')">
+<img src="wojak.png" width="100"><br>
+WOJAK
+</button>
+
+<button onclick="startGame('GOBLIN')">
+<img src="goblin.png" width="100"><br>
+GOBLIN
+</button>
+
+<button onclick="startGame('HODL')">
+<img src="hodl.png" width="100"><br>
+HODL
+</button>
+
+</div>
+
+</div>
+
+<div id="game" style="display:none;">
+
+<div id="hud">
+
+<div>
+
+PLAYER
+
+<div class="bar">
+<div id="playerHP"></div>
+</div>
+
+</div>
+
+<div>
+
+ENEMY
+
+<div class="bar">
+<div id="enemyHP"></div>
+</div>
+
+</div>
+
+</div>
+
+<canvas id="arena"></canvas>
+
+<div id="controls">
+
+A = LEFT |
+D = RIGHT |
+J = PUNCH |
+K = KICK |
+L = SPECIAL
+
+</div>
+
+</div>
+
+<script src="arena.js"></script>
 
 </body>
 </html>
