@@ -519,6 +519,7 @@ function updateAnimation(entity, dt) {
         );
     }
 }
+}
 
 function drawStage() {
   if (imageCache[backgroundSrc]) {
