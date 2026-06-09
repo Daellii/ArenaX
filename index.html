@@ -15,149 +15,250 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
 background:#05030a;
 color:white;
-overflow-x:hidden;
 }
 
-/* HERO */
-
-.hero{
-
+.banner{
 width:100%;
-height:100vh;
-
-background-image:url("https://raw.githubusercontent.com/Daellii/ArenaX/main/banner.png");
-
-background-repeat:no-repeat;
-background-position:center center;
-background-size:contain;
-
-display:flex;
-justify-content:center;
-align-items:flex-end;
-
-padding-bottom:60px;
+display:block;
 }
+
+/* ARENA PANEL */
+
+.arena-panel{
+
+max-width:1000px;
+
+margin:-30px auto 80px auto;
+
+background:linear-gradient(
+180deg,
+rgba(24,18,40,.96),
+rgba(8,6,14,.96)
+);
+
+border:2px solid #8d4cff;
+
+border-radius:24px;
+
+padding:50px 30px;
+
+text-align:center;
+
+box-shadow:
+0 0 40px rgba(141,76,255,.25);
+
+}
+
+.arena-panel h1{
+
+font-size:3rem;
+
+margin-bottom:15px;
+
+color:#d8a8ff;
+
+text-shadow:
+0 0 20px rgba(216,168,255,.5);
+
+}
+
+.arena-panel p{
+
+color:#ccc;
+
+font-size:1.15rem;
+
+margin-bottom:35px;
+
+}
+
+/* BUTTONS */
 
 .hero-buttons{
+
 display:flex;
-gap:20px;
-flex-wrap:wrap;
+
 justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
 }
 
 .btn{
-padding:16px 34px;
-border-radius:12px;
-text-decoration:none;
+
+padding:18px 36px;
+
+border-radius:14px;
+
 font-weight:bold;
+
+text-decoration:none;
+
 transition:.3s;
+
+letter-spacing:1px;
+
 }
 
-.primary{
-background:#b05cff;
+.battle{
+
+background:linear-gradient(
+45deg,
+#ff4d4d,
+#ff7b00
+);
+
 color:white;
+
+border:2px solid #ff7b00;
+
+box-shadow:
+0 0 20px rgba(255,123,0,.4);
+
 }
 
-.secondary{
-border:2px solid #b05cff;
+.arena{
+
+background:linear-gradient(
+45deg,
+#7b2cff,
+#d44dff
+);
+
 color:white;
+
+border:2px solid #d44dff;
+
+box-shadow:
+0 0 20px rgba(212,77,255,.4);
+
 }
 
-.primary:hover,
-.secondary:hover{
-transform:translateY(-3px);
+.battle:hover,
+.arena:hover{
+
+transform:
+translateY(-4px)
+scale(1.05);
+
 }
 
 /* CONTENT */
 
 section{
-padding:80px 20px;
+
 max-width:1200px;
+
 margin:auto;
+
+padding:80px 20px;
+
 }
 
 .section-title{
-text-align:center;
-font-size:2.5rem;
-margin-bottom:40px;
-color:#d8a8ff;
-}
 
-.story{
-max-width:800px;
-margin:auto;
 text-align:center;
-line-height:1.8;
-font-size:1.2rem;
-color:#ddd;
+
+font-size:2.5rem;
+
+margin-bottom:50px;
+
+color:#d8a8ff;
+
 }
 
 .cards{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
 }
 
 .card{
+
 background:#151022;
+
 padding:30px;
-border-radius:16px;
+
+border-radius:18px;
+
 border:1px solid #312244;
+
 text-align:center;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+border-color:#8d4cff;
+
 }
 
 .card h3{
+
 margin-bottom:15px;
+
 color:#d8a8ff;
+
 }
 
-.leaderboard{
-max-width:700px;
-margin:auto;
-}
-
-.player{
-display:flex;
-justify-content:space-between;
-padding:18px;
-margin-bottom:10px;
-background:#151022;
-border-radius:12px;
-}
+/* FOOTER */
 
 footer{
-padding:50px;
+
+padding:60px;
+
 text-align:center;
+
 color:#777;
+
 }
 
 /* MOBILE */
 
 @media(max-width:768px){
 
-.hero{
-height:75vh;
-background-position:center top;
+.arena-panel{
+
+margin:20px;
+
+}
+
+.arena-panel h1{
+
+font-size:2rem;
+
 }
 
 .hero-buttons{
+
 flex-direction:column;
-width:80%;
+
 }
 
 .btn{
+
 text-align:center;
+
 }
 
 .section-title{
+
 font-size:2rem;
+
 }
 
 }
@@ -167,78 +268,82 @@ font-size:2rem;
 
 <body>
 
-<section class="hero">
+<img
+src="https://raw.githubusercontent.com/Daellii/ArenaX/main/banner.png"
+class="banner"
+alt="ArenaX Banner">
+
+<div class="arena-panel">
+
+<h1>⚔️ WELCOME TO THE MEME BATTLEGROUND ⚔️</h1>
+
+<p>
+Fight. Climb. Dominate.
+<br><br>
+Only one wins.
+</p>
 
 <div class="hero-buttons">
 
 <a
 href="https://x.com/ArenaXCoin"
 target="_blank"
-class="btn primary">
-FOLLOW ON X
+class="btn battle">
+🔥 JOIN THE LEGION
 </a>
 
 <a
-href="#arena"
-class="btn secondary">
-ENTER ARENA
+href="arena.html"
+class="btn arena">
+⚔️ ENTER THE ARENA
 </a>
 
 </div>
 
-</section>
+</div>
 
 <section>
 
 <h2 class="section-title">
-The Story
-</h2>
-
-<div class="story">
-
-The internet has fallen.
-
-<br><br>
-
-Every meme enters the Arena.
-
-<br><br>
-
-Chads. Pepes. Goblins. Moon Kings.
-
-<br><br>
-
-Only one survives.
-
-<br><br>
-
-Welcome to ArenaX.
-
-</div>
-
-</section>
-
-<section id="arena">
-
-<h2 class="section-title">
-Arena Rewards
+🗺️ ROADMAP
 </h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>HOLD</h3>
-<p>Hold 50,000+ ARX.</p>
+<h3>PHASE 1</h3>
+
+Website Launch<br>
+Branding<br>
+Community Building
+
 </div>
 
 <div class="card">
-<h3>FIGHT</h3>
-<p>Battle through the Arena.</p>
+<h3>PHASE 2</h3>
+
+Token Launch<br>
+Arena Rewards<br>
+Holder Benefits
+
 </div>
 
 <div class="card">
-<h3>EARN</h3>
-<p>Arena rewards for qualified warriors.</p>
+<h3>PHASE 3</h3>
+
+Arena Beta<br>
+PvP Battles<br>
+Leaderboards
+
+</div>
+
+<div class="card">
+<h3>PHASE 4</h3>
+
+Seasonal Tournaments<br>
+Advanced Rewards<br>
+Arena Champions
+
 </div>
 
 </div>
@@ -248,34 +353,33 @@ Arena Rewards
 <section>
 
 <h2 class="section-title">
-Top Warriors
+🏆 ARENA REWARDS
 </h2>
 
-<div class="leaderboard">
+<div class="cards">
 
-<div class="player">
-<span>#1 ChadMaster</span>
-<span>15,420 pts</span>
+<div class="card">
+
+<h3>🪙 HOLD</h3>
+
+Hold 50,000+ ARX
+
 </div>
 
-<div class="player">
-<span>#2 PepeSlayer</span>
-<span>14,990 pts</span>
+<div class="card">
+
+<h3>🎮 FIGHT</h3>
+
+Compete in ArenaX
+
 </div>
 
-<div class="player">
-<span>#3 MoonKing</span>
-<span>14,100 pts</span>
-</div>
+<div class="card">
 
-<div class="player">
-<span>#4 DiamondHands</span>
-<span>13,870 pts</span>
-</div>
+<h3>💰 EARN</h3>
 
-<div class="player">
-<span>#5 GoblinLord</span>
-<span>13,200 pts</span>
+Qualify for Arena Rewards
+
 </div>
 
 </div>
@@ -288,7 +392,7 @@ ARENAX © 2025
 
 <br><br>
 
-Only One Wins ⚔️
+⚔️ ONLY ONE WINS ⚔️
 
 </footer>
 
