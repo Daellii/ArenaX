@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = 1200;
 canvas.height = 600;
-ctx.imageSmoothingEnabled = true;
+ctx.imageSmoothingEnabled = false;
 
 const W = canvas.width;
 const H = canvas.height;
@@ -65,12 +65,13 @@ function staticFighter(name, portrait, opts = {}) {
 
 const fighters = {
   CHAD: {
-    display: "CHAD",
-    portrait: "chad.png",
-    hp: 120,
-    speed: 255,
-    w: 185,
-    h: 185,
+  display: "CHAD",
+  portrait: "chad.png",
+  sheet: "chad_sheet.png",
+  hp: 120,
+  speed: 255,
+  w: 185,
+  h: 185,
     anims: {
       idle: frames("sprites/chad", "chad_idle", 4),
       walk: frames("sprites/chad", "chad_walk", 4),
@@ -82,12 +83,13 @@ const fighters = {
     }
   },
   PEPE: {
-    display: "PEPE",
-    portrait: "pepe.png",
-    hp: 100,
-    speed: 280,
-    w: 175,
-    h: 175,
+  display: "PEPE",
+  portrait: "pepe.png",
+  sheet: "pepe_sheet.png",
+  hp: 100,
+  speed: 280,
+  w: 175,
+  h: 175,
     anims: {
       idle: frames("sprites/pepe", "pepe_idle", 4),
       walk: frames("sprites/pepe", "pepe_walk", 4),
@@ -285,6 +287,10 @@ function createFighter(name, side) {
     y: 330,
     w: def.w,
     h: def.h,
+
+    sheet: def.sheet || null,
+    sheetFrame: 0,
+
     hp: def.hp,
     maxHp: def.hp,
     speed: def.speed,
