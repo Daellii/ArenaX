@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>ArenaX</title>
+
+<link rel="stylesheet" href="arena.css">
+
+</head>
+
+<body>
+
+<div id="menu">
+
+<h1>⚔️ ARENAX ⚔️</h1>
+
+<p>Select Your Fighter</p>
+
+<div id="fighters">
+
+<button onclick="startGame('CHAD')">
+💪 CHAD DESTROYER
+</button>
+
+<button onclick="startGame('PEPE')">
+🐸 PEPE ASSASSIN
+</button>
+
+<button onclick="startGame('MOON')">
+🌙 MOON KING
+</button>
+
+<button onclick="startGame('GOBLIN')">
+👹 RUG GOBLIN
+</button>
+
+<button onclick="startGame('DIAMOND')">
+💎 DIAMOND HANDS
+</button>
+
+</div>
+
+</div>
+
+<div id="game" style="display:none;">
+
+<div id="hud">
+
+<div>
+Player HP
+<div class="bar">
+<div id="playerHP"></div>
+</div>
+</div>
+
+<div>
+Enemy HP
+<div class="bar">
+<div id="enemyHP"></div>
+</div>
+</div>
+
+</div>
+
+<canvas id="arena"></canvas>
+
+<div id="controls">
+
+A/D = MOVE
+
+J = PUNCH
+
+K = KICK
+
+L = SPECIAL
+
+</div>
+
+</div>
+
+<script src="arena.js"></script>
+
+</body>
+</html>
