@@ -121,7 +121,12 @@ document.getElementById(
 
 function draw(){
 
-drawBackground();
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
 
 for(const c of coins){
 
