@@ -1,8 +1,8 @@
 const canvas = document.getElementById("maze");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 1200;
-canvas.height = 700;
+canvas.width = 650;
+canvas.height = 450;
 
 let player;
 let score = 0;
