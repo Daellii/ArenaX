@@ -50,3 +50,18 @@ background:#111;
 border:3px solid #8d4cff;
 margin-bottom:20px;
 }
+
+#controls{
+max-width:700px;
+margin:20px auto;
+padding:15px;
+background:#151022;
+border:2px solid #8d4cff;
+border-radius:12px;
+text-align:center;
+}
+
+#controls h3{
+margin-top:0;
+color:#d8a8ff;
+}
