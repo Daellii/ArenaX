@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArenaX Meme Maze</title>
 
+<link rel="stylesheet" href="meme-maze.css">
+</head>
+<body>
+
+<div id="menu">
+
+<h1>⚔️ ARENAX MEME MAZE ⚔️</h1>
+
+<h2>Select Your Meme</h2>
+
+<div id="fighters">
+
+<button onclick="startGame('chad.png')">
+<img src="../../chad.png">
+CHAD
+</button>
+
+<button onclick="startGame('pepe.png')">
+<img src="../../pepe.png">
+PEPE
+</button>
+
+<button onclick="startGame('wojak.png')">
+<img src="../../wojak.png">
+WOJAK
+</button>
+
+<button onclick="startGame('goblin.png')">
+<img src="../../goblin.png">
+GOBLIN
+</button>
+
+<button onclick="startGame('moonking.png')">
+<img src="../../moonking.png">
+MOONKING
+</button>
+
+<button onclick="startGame('hodl.png')">
+<img src="../../hodl.png">
+HODL
+</button>
+
+</div>
+
+</div>
+
+<div id="game">
+
+<div id="hud">
+
+<div id="score">
+SCORE: 0
+</div>
+
+</div>
+
+<canvas id="maze"></canvas>
+
+</div>
+
+<script src="meme-maze.js"></script>
+
+</body>
+</html>
