@@ -65,39 +65,40 @@ function staticFighter(name, portrait, opts = {}) {
 
 const fighters = {
   CHAD: {
-  display: "CHAD",
-  portrait: "chad.png",
-  sheet: "chad_sheet.png",
-  hp: 120,
-  speed: 255,
-  w: 185,
-  h: 185,
+    display: "CHAD",
+    portrait: "chad.png",
+    sheet: "chad_sheet.png",
+    hp: 120,
+    speed: 255,
+    w: 210,
+    h: 260,
     anims: {
-      idle: frames("sprites/chad", "chad_idle", 4),
-      walk: frames("sprites/chad", "chad_walk", 4),
+      idle: frames("sprites/chad", "chad_idle", 6),
+      walk: frames("sprites/chad", "chad_walk", 2),
       punch: frames("sprites/chad", "chad_punch", 2),
       kick: frames("sprites/chad", "chad_kick", 2),
-      special: frames("sprites/chad", "chad_kick", 2),
-      hit: frames("sprites/chad", "chad_hit", 2),
-      ko: frames("sprites/chad", "chad_ko", 2)
+      special: frames("sprites/chad", "chad_special", 2),
+      hit: frames("sprites/chad", "chad_idle", 2),
+      ko: frames("sprites/chad", "chad_ko", 1)
     }
   },
+
   PEPE: {
-  display: "PEPE",
-  portrait: "pepe.png",
-  sheet: "pepe_sheet.png",
-  hp: 100,
-  speed: 280,
-  w: 175,
-  h: 175,
+    display: "PEPE",
+    portrait: "pepe.png",
+    sheet: "pepe_sheet.png",
+    hp: 100,
+    speed: 280,
+    w: 210,
+    h: 260,
     anims: {
       idle: frames("sprites/pepe", "pepe_idle", 4),
       walk: frames("sprites/pepe", "pepe_walk", 4),
       punch: frames("sprites/pepe", "pepe_punch", 2),
       kick: frames("sprites/pepe", "pepe_kick", 2),
-      special: frames("sprites/pepe", "pepe_kick", 2),
+      special: frames("sprites/pepe", "pepe_special", 2),
       hit: frames("sprites/pepe", "pepe_hit", 2),
-      ko: frames("sprites/pepe", "pepe_ko", 4)
+      ko: frames("sprites/pepe", "pepe_ko", 2)
     }
   },
   MOONKING: staticFighter("MOONKING", "moonking.png", {
@@ -674,8 +675,8 @@ async function startGame(name) {
   player = createFighter(name, "left");
   enemy = createFighter(randomEnemy, "right");
 
-  player.y = 330;
-  enemy.y = 330;
+  player.y = 250;
+enemy.y = 250;
 
   player.state = "idle";
   enemy.state = "idle";
