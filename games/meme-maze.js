@@ -1,8 +1,8 @@
 const canvas = document.getElementById("maze");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = 1200;
+canvas.height = 700;
 
 let player;
 let score = 0;
@@ -39,13 +39,13 @@ document.getElementById("menu").style.display="none";
 document.getElementById("game").style.display="block";
 
 const playerImg = new Image();
-playerImg.src = "../../" + img;
+playerImg.src = "/" + img;
 
 player = {
 
 x:400,
 y:300,
-size:60,
+size:100,
 img:playerImg
 
 };
@@ -121,12 +121,7 @@ document.getElementById(
 
 function draw(){
 
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+drawBackground();
 
 for(const c of coins){
 
