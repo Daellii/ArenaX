@@ -14,6 +14,21 @@ coinImg.src =
 "https://cryptologos.cc/logos/solana-sol-logo.png";
 
 const coins = [];
+const walls = [
+
+{x:150,y:100,w:400,h:20},
+
+{x:150,y:380,w:400,h:20},
+
+{x:150,y:100,w:20,h:300},
+
+{x:530,y:100,w:20,h:300},
+
+{x:250,y:180,w:200,h:20},
+
+{x:250,y:300,w:200,h:20}
+
+];
 
 function createCoins(){
 
@@ -127,6 +142,19 @@ ctx.clearRect(
 canvas.width,
 canvas.height
 );
+
+  ctx.fillStyle = "#8d4cff";
+
+for(const wall of walls){
+
+ctx.fillRect(
+wall.x,
+wall.y,
+wall.w,
+wall.h
+);
+
+}
 
 for(const c of coins){
 
