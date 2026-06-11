@@ -163,7 +163,6 @@ TILE
 
 }
 
-}
 
 for(const c of coins){
 
