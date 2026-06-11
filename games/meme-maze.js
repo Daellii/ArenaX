@@ -10,9 +10,7 @@ let score = 0;
 const keys = {};
 
 const coinImg = new Image();
-coinImg.src =
-"https://cryptologos.cc/logos/solana-sol-logo.png";
-
+coinImg.src = "/sol_token.png";
 const coins = [];
 const TILE = 50;
 
