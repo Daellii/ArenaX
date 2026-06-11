@@ -45,7 +45,7 @@ player = {
 
 x:400,
 y:300,
-size:80,
+size:90,
 img:playerImg
 
 };
