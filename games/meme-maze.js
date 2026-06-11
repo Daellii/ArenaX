@@ -14,22 +14,21 @@ coinImg.src =
 "https://cryptologos.cc/logos/solana-sol-logo.png";
 
 const coins = [];
-const walls = [
+const TILE = 50;
 
-{x:150,y:100,w:400,h:20},
+const maze = [
 
-{x:150,y:380,w:400,h:20},
-
-{x:150,y:100,w:20,h:300},
-
-{x:530,y:100,w:20,h:300},
-
-{x:250,y:180,w:200,h:20},
-
-{x:250,y:300,w:200,h:20}
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,1,1,0,1,1,1,1,0,1,1,0,1],
+[1,0,0,0,0,0,0,0,1,0,0,0,0,1],
+[1,0,1,1,0,1,1,0,1,0,1,1,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,1,1,0,1,1,1,1,0,1,1,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
 ];
-
 function createCoins(){
 
 coins.length = 0;
@@ -143,16 +142,26 @@ canvas.width,
 canvas.height
 );
 
-  ctx.fillStyle = "#8d4cff";
+ctx.fillStyle = "#8d4cff";
 
-for(const wall of walls){
+for(let row=0; row<maze.length; row++){
+
+for(let col=0; col<maze[row].length; col++){
+
+if(maze[row][col] === 1){
 
 ctx.fillRect(
-wall.x,
-wall.y,
-wall.w,
-wall.h
+col * TILE,
+row * TILE,
+TILE,
+TILE
 );
+
+}
+
+}
+
+}
 
 }
 
