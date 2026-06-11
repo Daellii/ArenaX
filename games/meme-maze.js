@@ -86,10 +86,24 @@ keys[e.key.toLowerCase()] = false;
 
 function update(){
 
-if(keys["w"]) player.y-=4;
-if(keys["s"]) player.y+=4;
-if(keys["a"]) player.x-=4;
-if(keys["d"]) player.x+=4;
+let newX = player.x;
+let newY = player.y;
+
+if(keys["w"]) newY -= 4;
+if(keys["s"]) newY += 4;
+if(keys["a"]) newX -= 4;
+if(keys["d"]) newX += 4;
+
+const col = Math.floor((newX + player.size/2) / TILE);
+const row = Math.floor((newY + player.size/2) / TILE);
+
+if(
+maze[row] &&
+maze[row][col] === 0
+){
+player.x = newX;
+player.y = newY;
+}
 
 player.x=Math.max(
 0,
